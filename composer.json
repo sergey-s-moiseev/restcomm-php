@@ -2,6 +2,7 @@
     "name": "sergey-s-moiseev/restcomm-php",
     "license": "MIT",
     "type": "project",
+    "homepage": "https://github.com/sergey-s-moiseev/restcomm-php",
     "keywords": [
         "restcomm",
         "api",
