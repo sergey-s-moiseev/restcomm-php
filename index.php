@@ -8,6 +8,7 @@
 //    $response = $restcomm->Accounts();
     $response = $restcomm->Calls('+7123456789','sip:alice@127.0.0.1:5060','http://172.17.0.2:8080/restcomm/demos/hello-play.xml');
 
+    $a=[];
     var_dump($response);
 
 
