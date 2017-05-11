@@ -37,24 +37,29 @@ $ php composer.phar require sergey-s-moiseev/restcomm-php
     
 ```
 
- Available functions:
- 
-      Account:
-       ->getInformationAboutTheDefaultAccount()
+
+ ## Available functions
+ [Account Restcomm Account documentation] (http://documentation.telestax.com/connect/api/account-api.html#account)
+    
+      Account:   
+       ->getInformationAboutTheDefaultAccount() 
        ->updatePasswordUsingAccountSid($new_password)
        ->updatePasswordUsingEmailAddress($email, $new_password)
-      
+       
+ [Account Restcomm Calls documentation] (http://documentation.telestax.com/connect/api/calls-api.html#calls)
       Calls:
        ->makingACall($from, $to, $url)
        ->terminateInProgressCall($call_id)
        ->terminateRingingCall($call_id)
 
+ [Account Restcomm Clients documentation] (http://documentation.telestax.com/connect/api/clients-api.html#clients)
       Clients:
        ->createAClient($login, $password)
        ->deleteAClient($sid)
        ->changeClientsPassword($sid, $password)
        ->getListOfAvailableClients()
 
+ [Account Restcomm SMS documentation] (http://documentation.telestax.com/connect/api/sms-api.html#sms)
       SMS:
        ->sendSMS($from, $to, $text)
        ->getListOfSMSMessages()
