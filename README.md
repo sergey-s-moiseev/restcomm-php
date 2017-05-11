@@ -47,12 +47,14 @@ $ php composer.phar require sergey-s-moiseev/restcomm-php
        ->updatePasswordUsingEmailAddress($email, $new_password)
        
  [Account Restcomm Calls documentation] (http://documentation.telestax.com/connect/api/calls-api.html#calls)
+ 
       Calls:
        ->makingACall($from, $to, $url)
        ->terminateInProgressCall($call_id)
        ->terminateRingingCall($call_id)
 
  [Account Restcomm Clients documentation] (http://documentation.telestax.com/connect/api/clients-api.html#clients)
+ 
       Clients:
        ->createAClient($login, $password)
        ->deleteAClient($sid)
@@ -60,6 +62,7 @@ $ php composer.phar require sergey-s-moiseev/restcomm-php
        ->getListOfAvailableClients()
 
  [Account Restcomm SMS documentation] (http://documentation.telestax.com/connect/api/sms-api.html#sms)
+ 
       SMS:
        ->sendSMS($from, $to, $text)
        ->getListOfSMSMessages()
