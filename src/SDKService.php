@@ -5,7 +5,6 @@ namespace SergeySMoiseev\Restcomm;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\post;
-use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Stream;
 
 class SDKService
@@ -23,27 +22,62 @@ class SDKService
         $this->token = $token;
     }
 
-    public function SDKPostCommand ($command, $form_params)
+    public function SDKCommand ($method = 'POST', $command = '', $form_params = '', $id = '')
     {
+        $result = '';
+        if (empty($id)) $id = $this->sid;
         $client = new Client();
-        $url = 'http://' . $this->sid . ':' . $this->token . '@' . $this->host . ':' . $this->port . '/restcomm/2012-04-24/Accounts/' . $this->sid . $command;
-//      var_dump($url, $form_params);exit;
-
-        $response = $client->request('POST', $url, [
-            'form_params'=> $form_params
-        ]);
-        $xml =(string) $response->getBody();
-        return $xml;
+        $url = 'http://' . $this->sid . ':' . $this->token . '@' . $this->host . ':' . $this->port . '/restcomm/2012-04-24/Accounts/' . $id . $command;
+        try{
+            $response = $client->request($method, $url, [
+                'form_params'=> $form_params
+            ]);
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+        $content =  $response->getBody();
+        $type = $response->getHeaders()['Content-Type'];
+       if ($type[0] == 'application/xml'){
+            $xml = simplexml_load_string($content);
+            foreach ($xml as $element) {
+                foreach($element as $key => $val) {
+                    $result["{$key}"] = "{$val}";
+                }
+            }
+       } elseif($type[0] == 'application/json'){
+           $json = json_decode($content);
+           $result = (get_object_vars ($json));
+       }
+       else  {$result = $content;}
+       return $result;
     }
 
-    public function SDKGetCommand ($command, $form_params)
-    {
+    public function SDKServerCommand ($method = 'POST', $command = '', $form_params = '', $id = ''){
+        $result = '';
+        if (empty($id)) $id = $this->sid;
         $client = new Client();
-        $url = 'http://' . $this->sid . ':' . $this->token . '@' . $this->host . ':' . $this->port . '/restcomm/2012-04-24/Accounts/' . $this->sid . $command;
-        $response = $client->request('GET', $url, [
-            'form_params'=> $form_params
-        ]);
-        $xml =(string) $response->getBody();
-        return $xml;
+        $url = 'http://'.$this->host . ':' . $this->port . '/restcomm/201204-24/Accounts/' . $id . $command;
+        try{
+            $response = $client->request($method, $url, [
+                'form_params'=> $form_params
+            ]);
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+        $content =  $response->getBody();
+        $type = $response->getHeaders()['Content-Type'];
+        if ($type[0] == 'application/xml'){
+            $xml = simplexml_load_string($content);
+            foreach ($xml as $element) {
+                foreach($element as $key => $val) {
+                    $result["{$key}"] = "{$val}";
+                }
+            }
+        } elseif($type[0] == 'application/json'){
+            $json = json_decode($content);
+            $result = (get_object_vars ($json));
+        }
+        else  {$result = $content;}
+        return $result;
     }
 }
