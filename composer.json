@@ -21,8 +21,9 @@
         "php": ">=5.5.9",
         "ext-curl": "*"
     },
+
     "require-dev": {
-        "phpunit/phpunit": "5.2.*",
+        "phpunit/phpunit": "^6.1",
         "symfony/var-dumper": ">=2.6",
         "squizlabs/php_codesniffer": "2.*",
         "guzzlehttp/guzzle": "~6.0"
@@ -30,12 +31,13 @@
     },
     "autoload": {
         "psr-4": {
-            "SergeySMoiseev\\Restcomm\\": "src"
+            "SergeySMoiseev\\Restcomm\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "SergeySMoiseev\\Restcomm\\": "tests"
+            "SergeySMoiseev\\Restcomm\\": "tests/"
         }
+
     }
 }

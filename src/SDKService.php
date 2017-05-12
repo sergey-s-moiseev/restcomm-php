@@ -4,8 +4,6 @@ namespace SergeySMoiseev\Restcomm;
 
 
 use GuzzleHttp\Client;
-use GuzzleHttp\post;
-use GuzzleHttp\Stream;
 
 class SDKService
 {
@@ -22,9 +20,9 @@ class SDKService
         $this->token = $token;
     }
 
-    public function SDKCommand ($method = 'POST', $command = '', $form_params = '', $id = '')
+    public function SDKCommand ($method = 'POST', $command = '', $form_params = [], $id = '')
     {
-        $result = '';
+        $result = [];
         if (empty($id)) $id = $this->sid;
         $client = new Client();
         $url = 'http://' . $this->sid . ':' . $this->token . '@' . $this->host . ':' . $this->port . '/restcomm/2012-04-24/Accounts/' . $id . $command;
@@ -53,7 +51,7 @@ class SDKService
     }
 
     public function SDKServerCommand ($method = 'POST', $command = '', $form_params = '', $id = ''){
-        $result = '';
+        $result = [];
         if (empty($id)) $id = $this->sid;
         $client = new Client();
         $url = 'http://'.$this->host . ':' . $this->port . '/restcomm/201204-24/Accounts/' . $id . $command;

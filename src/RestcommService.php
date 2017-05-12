@@ -1,6 +1,7 @@
 <?php
 
 namespace SergeySMoiseev\Restcomm;
+
 class RestcommService
 {
     protected $sdkService;
