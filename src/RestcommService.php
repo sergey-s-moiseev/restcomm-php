@@ -7,20 +7,24 @@ class RestcommService
     protected $sdkService;
     protected $host;
     protected $port;
+    protected $ver;
     protected $sid;
     protected $token;
-    public function __construct($host, $port, $sid, $token)
+    public function __construct($host, $port, $ver, $sid, $token)
     {
-        $this->sdkService = new SDKService($host, $port, $sid, $token);
         $this->host = $host;
         $this->port = $port;
+        $this->ver = $ver;
         $this->sid = $sid;
         $this->token = $token;
+        $this->sdkService = new SDKService($this->host, $this->port, $this->ver , $this->sid, $this->token);
+
     }
 
     /**Account**/
 
     public function getInformationAboutTheDefaultAccount(){
+//        $sdk = new SDKService($this->host, $this->port, $this->ver , $this->sid, $this->token);
         $contents = $this->sdkService->SDKCommand('POST');
         return $contents;
     }

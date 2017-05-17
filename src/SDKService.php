@@ -9,15 +9,19 @@ class SDKService
 {
     protected $host;
     protected $port;
+    protected $ver;
     protected $sid;
     protected $token;
 
-    public function __construct($host, $port, $sid, $token)
+    public function __construct($host, $port, $ver, $sid, $token)
     {
         $this->host = $host;
         $this->port = $port;
+        $this->ver = $ver;
         $this->sid = $sid;
         $this->token = $token;
+
+//        var_dump($host,$port,$ver,$sid,$token); exit;
     }
 
     public function SDKCommand ($method = 'POST', $command = '', $form_params = [], $id = '')
@@ -25,7 +29,7 @@ class SDKService
         $result = [];
         if (empty($id)) $id = $this->sid;
         $client = new Client();
-        $url = 'http://' . $this->sid . ':' . $this->token . '@' . $this->host . ':' . $this->port . '/restcomm/2012-04-24/Accounts/' . $id . $command;
+        $url = 'http://' . $this->sid . ':' . $this->token . '@' . $this->host . ':' . $this->port . '/restcomm/'.$this->ver.'/Accounts/' . $id . $command;
         try{
             $response = $client->request($method, $url, [
                 'form_params'=> $form_params
@@ -54,7 +58,7 @@ class SDKService
         $result = [];
         if (empty($id)) $id = $this->sid;
         $client = new Client();
-        $url = 'http://'.$this->host . ':' . $this->port . '/restcomm/201204-24/Accounts/' . $id . $command;
+        $url = 'http://'.$this->host . ':' . $this->port .'/restcomm/'.$this->ver.'/Accounts/'. $id . $command;
         try{
             $response = $client->request($method, $url, [
                 'form_params'=> $form_params

@@ -32,10 +32,32 @@ $ php composer.phar require sergey-s-moiseev/restcomm-php
 ### Usage
 
 ```
-    $rs = new RestcommService('YOUR_RESTCOMM_SDK_URL','YOUR_RESTCOMM_SDK_PORT','YOUR_SID','YOUR_TOKEN');
+    $rs = new RestcommService('YOUR_RESTCOMM_SDK_URL','YOUR_RESTCOMM_SDK_PORT', 'RESTCOMM_VERSION like a '2012-04-24'', 'YOUR_SID','YOUR_TOKEN');
     $response = $rs->sendSMS('PHONE_NUMBER_FROM','PHONE_NUMBER_TO','MESSAGE_TEXT');
     
 ```
+
+###To install as Service add:
+in /app/config/services.yml
+```
+    restcomm_php:
+      class: SergeySMoiseev\Restcomm\RestcommService
+      arguments: ['%restcomm_host%', '%restcomm_port%', '%restcomm_ver%', '%restcomm_sid%', '%restcomm_token%', ]
+```
+in /app/config/parameters.yml
+```  
+       restcomm_host: 'YOUR_RESTCOMM_SDK_URL'
+       restcomm_port: 'YOUR_RESTCOMM_SDK_PORT'
+       restcomm_ver: 'RESTCOMM_VERSION like a '2012-04-24''
+       restcomm_sid: 'YOUR_SID'
+       restcomm_token: 'YOUR_TOKEN'
+```
+### As service usage example 
+```
+        $rs = $this->container->get('restcomm_php');
+        $result = $rs->getInformationAboutTheDefaultAccount();
+```
+
 
 
  ## Available functions
